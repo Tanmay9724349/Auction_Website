@@ -186,7 +186,7 @@ export const deleteAuction = (id) => async (dispatch) => {
   dispatch(auctionSlice.actions.deleteAuctionItemRequest());
   try {
     const response = await axios.delete(
-      `http://auction-website-tf.vercel.app/api/v1/auctionitem/delete/${id}`,
+      `https://auction-website-tf.vercel.app/api/v1/auctionitem/delete/${id}`,
       {
         withCredentials: true,
       }
