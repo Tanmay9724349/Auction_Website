@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 const auctionSlice = createSlice({
   name: "auction",
@@ -91,7 +90,7 @@ export const getAllAuctionItems = () => async (dispatch) => {
   dispatch(auctionSlice.actions.getAllAuctionItemRequest());
   try {
     const response = await axios.get(
-      `${API_BASE}/api/v1/auctionitem/allitems`,
+      "http://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/auctionitem/allitems",
       { withCredentials: true }
     );
     dispatch(
@@ -109,7 +108,7 @@ export const getMyAuctionItems = () => async (dispatch) => {
   dispatch(auctionSlice.actions.getMyAuctionsRequest());
   try {
     const response = await axios.get(
-      `${API_BASE}/api/v1/auctionitem/myitems`,
+      "http://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/auctionitem/myitems",
       { withCredentials: true }
     );
     dispatch(auctionSlice.actions.getMyAuctionsSuccess(response.data.items));
@@ -125,7 +124,7 @@ export const getAuctionDetail = (id) => async (dispatch) => {
   dispatch(auctionSlice.actions.getAuctionDetailRequest());
   try {
     const response = await axios.get(
-      `${API_BASE}/api/v1/auctionitem/auction/${id}`,
+      `http://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/auctionitem/auction/${id}`,
       { withCredentials: true }
     );
     dispatch(auctionSlice.actions.getAuctionDetailSuccess(response.data));
@@ -141,7 +140,7 @@ export const createAuction = (data) => async (dispatch) => {
   dispatch(auctionSlice.actions.createAuctionRequest());
   try {
     const response = await axios.post(
-      `${API_BASE}/api/v1/auctionitem/create`,
+      "http://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/auctionitem/create",
       data,
       {
         withCredentials: true,
@@ -163,7 +162,7 @@ export const republishAuction = (id, data) => async (dispatch) => {
   dispatch(auctionSlice.actions.republishItemRequest());
   try {
     const response = await axios.put(
-      `${API_BASE}/api/v1/auctionitem/item/republish/${id}`,
+      `http://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/auctionitem/item/republish/${id}`,
       data,
       {
         withCredentials: true,
@@ -187,7 +186,7 @@ export const deleteAuction = (id) => async (dispatch) => {
   dispatch(auctionSlice.actions.deleteAuctionItemRequest());
   try {
     const response = await axios.delete(
-      `${API_BASE}/api/v1/auctionitem/delete/${id}`,
+      `https://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/auctionitem/delete/${id}`,
       {
         withCredentials: true,
       }

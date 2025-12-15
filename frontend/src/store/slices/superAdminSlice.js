@@ -2,7 +2,6 @@ import axios from "axios";
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { getAllAuctionItems } from "./auctionSlice";
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 const superAdminSlice = createSlice({
   name: "superAdmin",
@@ -108,7 +107,7 @@ export const getMonthlyRevenue = () => async (dispatch) => {
   dispatch(superAdminSlice.actions.requestForMonthlyRevenue());
   try {
     const response = await axios.get(
-      `${API_BASE}/api/v1/superadmin/monthlyincome`,
+      "https://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/superadmin/monthlyincome",
       { withCredentials: true }
     );
     dispatch(
@@ -126,7 +125,7 @@ export const getAllUsers = () => async (dispatch) => {
   dispatch(superAdminSlice.actions.requestForAllUsers());
   try {
     const response = await axios.get(
-      `${API_BASE}/api/v1/superadmin/users/getall`,
+      "https://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/superadmin/users/getall",
       { withCredentials: true }
     );
     dispatch(superAdminSlice.actions.successForAllUsers(response.data));
@@ -140,7 +139,7 @@ export const getAllPaymentProofs = () => async (dispatch) => {
   dispatch(superAdminSlice.actions.requestForPaymentProofs());
   try {
     const response = await axios.get(
-      `${API_BASE}/api/v1/superadmin/paymentproofs/getall`,
+      "https://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/superadmin/paymentproofs/getall",
       { withCredentials: true }
     );
     dispatch(
@@ -158,7 +157,7 @@ export const deletePaymentProof = (id) => async (dispatch) => {
   dispatch(superAdminSlice.actions.requestForDeletePaymentProof());
   try {
     const response = await axios.delete(
-      `${API_BASE}/api/v1/superadmin/paymentproof/delete/${id}`,
+      `https://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/superadmin/paymentproof/delete/${id}`,
       { withCredentials: true }
     );
     dispatch(superAdminSlice.actions.successForDeletePaymentProof());
@@ -175,7 +174,7 @@ export const getSinglePaymentProofDetail = (id) => async (dispatch) => {
   dispatch(superAdminSlice.actions.requestForSinglePaymentProofDetail());
   try {
     const response = await axios.get(
-      `${API_BASE}/api/v1/superadmin/paymentproof/${id}`,
+      `https://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/superadmin/paymentproof/${id}`,
       { withCredentials: true }
     );
     dispatch(
@@ -193,7 +192,7 @@ export const updatePaymentProof = (id, status, amount) => async (dispatch) => {
   dispatch(superAdminSlice.actions.requestForUpdatePaymentProof());
   try {
     const response = await axios.put(
-      `${API_BASE}/api/v1/superadmin/paymentproof/status/update/${id}`,
+      `https://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/superadmin/paymentproof/status/update/${id}`,
       { status, amount },
       { withCredentials: true, headers: { "Content-Type": "application/json" } }
     );
@@ -212,7 +211,7 @@ export const deleteAuctionItem = (id) => async (dispatch) => {
   dispatch(superAdminSlice.actions.requestForAuctionItemDelete());
   try {
     const response = await axios.delete(
-      `${API_BASE}/api/v1/superadmin/auctionitem/delete/${id}`,
+      `https://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/superadmin/auctionitem/delete/${id}`,
       { withCredentials: true }
     );
     dispatch(superAdminSlice.actions.successForAuctionItemDelete());
