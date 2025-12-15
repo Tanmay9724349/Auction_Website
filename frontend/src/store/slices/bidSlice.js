@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { getAuctionDetail } from "./auctionSlice";
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 const bidSlice = createSlice({
   name: "bid",
@@ -24,7 +25,7 @@ const bidSlice = createSlice({
 export const placeBid = (id, data) => async (dispatch) => {
   dispatch(bidSlice.actions.bidRequest());
   try {
-    const response = await axios.post(`https://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/bid/place/${id}`, data, {
+    const response = await axios.post(`${API_BASE}/api/v1/bid/place/${id}`, data, {
       withCredentials: true,
       headers: { "Content-Type": "application/json" },
     });

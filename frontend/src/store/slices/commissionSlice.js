@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 const commissionSlice = createSlice({
   name: "commission",
@@ -24,7 +25,7 @@ export const postCommissionProof = (data) => async (dispatch) => {
   dispatch(commissionSlice.actions.postCommissionProofRequest());
   try {
     const response = await axios.post(
-      "https://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/commission/proof",
+      `${API_BASE}/api/v1/commission/proof`,
       data,
       {
         withCredentials: true,
