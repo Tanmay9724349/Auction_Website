@@ -24,7 +24,7 @@ const bidSlice = createSlice({
 export const placeBid = (id, data) => async (dispatch) => {
   dispatch(bidSlice.actions.bidRequest());
   try {
-    const response = await axios.post(`https://auction-website-msscjbyis-tanmay-patels-projects-03162225.vercel.app/api/v1/bid/place/${id}`, data, {
+    const response = await axios.post(`https://auction-website-lake.vercel.app/api/v1/bid/place/${id}`, data, {
       withCredentials: true,
       headers: { "Content-Type": "application/json" },
     });
