@@ -29,7 +29,7 @@ app.use((req, res, next) => {
   next();
 });
 
-const allowedOrigin = process.env.FRONTEND_URL || "*";
+
 app.use(
   cors({
     origin: FRONTEND_URL,
