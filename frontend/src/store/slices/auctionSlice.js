@@ -90,7 +90,7 @@ export const getAllAuctionItems = () => async (dispatch) => {
   dispatch(auctionSlice.actions.getAllAuctionItemRequest());
   try {
     const response = await axios.get(
-      "http://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/auctionitem/allitems",
+      "https://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/auctionitem/allitems",
       { withCredentials: true }
     );
     dispatch(
@@ -108,7 +108,7 @@ export const getMyAuctionItems = () => async (dispatch) => {
   dispatch(auctionSlice.actions.getMyAuctionsRequest());
   try {
     const response = await axios.get(
-      "http://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/auctionitem/myitems",
+      "https://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/auctionitem/myitems",
       { withCredentials: true }
     );
     dispatch(auctionSlice.actions.getMyAuctionsSuccess(response.data.items));
@@ -124,7 +124,7 @@ export const getAuctionDetail = (id) => async (dispatch) => {
   dispatch(auctionSlice.actions.getAuctionDetailRequest());
   try {
     const response = await axios.get(
-      `http://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/auctionitem/auction/${id}`,
+      `https://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/auctionitem/auction/${id}`,
       { withCredentials: true }
     );
     dispatch(auctionSlice.actions.getAuctionDetailSuccess(response.data));
@@ -140,7 +140,7 @@ export const createAuction = (data) => async (dispatch) => {
   dispatch(auctionSlice.actions.createAuctionRequest());
   try {
     const response = await axios.post(
-      "http://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/auctionitem/create",
+      "https://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/auctionitem/create",
       data,
       {
         withCredentials: true,
@@ -162,7 +162,7 @@ export const republishAuction = (id, data) => async (dispatch) => {
   dispatch(auctionSlice.actions.republishItemRequest());
   try {
     const response = await axios.put(
-      `http://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/auctionitem/item/republish/${id}`,
+      `https://auction-website-jxq8vi3by-tanmay-patels-projects-03162225.vercel.app/api/v1/auctionitem/item/republish/${id}`,
       data,
       {
         withCredentials: true,
