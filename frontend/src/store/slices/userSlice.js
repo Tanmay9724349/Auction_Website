@@ -106,13 +106,14 @@ export const register = (data) => async (dispatch) => {
     toast.error(error.response.data.message);
     dispatch(userSlice.actions.clearAllErrors());
   }
+  
 };
 
 export const login = (data) => async (dispatch) => {
   dispatch(userSlice.actions.loginRequest());
   try {
     const response = await axios.post(
-      "https://auction-website-tf.vercel.app/api/v1/user/login",
+      "https://auction-website-msscjbyis-tanmay-patels-projects-03162225.vercel.app/api/v1/user/login",
       data,
       {
         withCredentials: true,
@@ -132,7 +133,7 @@ export const login = (data) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   try {
     const response = await axios.get(
-      "https://auction-website-tf.vercel.app/api/v1/user/logout",
+      "https://auction-website-msscjbyis-tanmay-patels-projects-03162225.vercel.app/api/v1/user/logout",
       { withCredentials: true }
     );
     dispatch(userSlice.actions.logoutSuccess());
@@ -148,7 +149,7 @@ export const logout = () => async (dispatch) => {
 export const fetchUser = () => async (dispatch) => {
   dispatch(userSlice.actions.fetchUserRequest());
   try {
-    const response = await axios.get("https://auction-website-tf.vercel.app/api/v1/user/me", {
+    const response = await axios.get("https://auction-website-msscjbyis-tanmay-patels-projects-03162225.vercel.app/api/v1/user/me", {
       withCredentials: true,
     });
     dispatch(userSlice.actions.fetchUserSuccess(response.data.user));
@@ -164,7 +165,7 @@ export const fetchLeaderboard = () => async (dispatch) => {
   dispatch(userSlice.actions.fetchLeaderboardRequest());
   try {
     const response = await axios.get(
-      "https://auction-website-tf.vercel.app/api/v1/user/leaderboard",
+      "https://auction-website-msscjbyis-tanmay-patels-projects-03162225.vercel.app/api/v1/user/leaderboard",
       {
         withCredentials: true,
       }
