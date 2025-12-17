@@ -29,7 +29,16 @@ app.use(
       if (!origin) return callback(null, true); // allow server-to-server or same-origin requests
       if (whitelist.length === 0) return callback(null, true); // no whitelist => allow all
       if (whitelist.includes(origin)) return callback(null, true);
-      return callback(new Error("Not allowed by CORS"), false);
+        // allow Vercel preview / project subdomains (e.g. *.vercel.app)
+        try {
+          const parsed = new URL(origin);
+          if (parsed.hostname && parsed.hostname.endsWith(".vercel.app")) {
+            return callback(null, true);
+          }
+        } catch (e) {
+          // fallthrough to deny
+        }
+        return callback(new Error("Not allowed by CORS"), false);
     },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
