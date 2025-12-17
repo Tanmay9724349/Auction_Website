@@ -1,5 +1,5 @@
 import express from "express";
-import dotenv from "dotenv";
+import dotenv, { config } from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
@@ -12,7 +12,7 @@ import commissionRouter from "./router/commissionRouter.js";
 import superAdminRoutes from "./router/superAdminRoutes.js";
 import { errorMiddleware } from "./middlewares/error.js";
 
-dotenv.config();
+dotenv.config({ path: "./config/config.env" });
 
 const app = express();
 
