@@ -90,8 +90,8 @@ const userSlice = createSlice({
 export const register = (data) => async (dispatch) => {
   dispatch(userSlice.actions.registerRequest());
   try {
-    const response = await axios.get(
-      "https://auction-website-lake.vercel.app/api/v1/user/register",
+    const response = await axios.post(
+      "https://auction-website-lake.vercel.app/api/v1/user/sign-up",
       data,
       {
         withCredentials: true,
