@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { api } from "../../lib/api";
 import { toast } from "react-toastify";
 
 const auctionSlice = createSlice({
@@ -89,10 +90,7 @@ const auctionSlice = createSlice({
 export const getAllAuctionItems = () => async (dispatch) => {
   dispatch(auctionSlice.actions.getAllAuctionItemRequest());
   try {
-    const response = await axios.get(
-      "https://auction-website-lake.vercel.app/api/v1/auctionitem/allitems",
-      { withCredentials: true }
-    );
+    const response = await axios.get(api("/api/v1/auctionitem/allitems"), { withCredentials: true });
     dispatch(
       auctionSlice.actions.getAllAuctionItemSuccess(response.data.items)
     );
@@ -107,10 +105,7 @@ export const getAllAuctionItems = () => async (dispatch) => {
 export const getMyAuctionItems = () => async (dispatch) => {
   dispatch(auctionSlice.actions.getMyAuctionsRequest());
   try {
-    const response = await axios.get(
-      "https://auction-website-lake.vercel.app/api/v1/auctionitem/myitems",
-      { withCredentials: true }
-    );
+    const response = await axios.get(api("/api/v1/auctionitem/myitems"), { withCredentials: true });
     dispatch(auctionSlice.actions.getMyAuctionsSuccess(response.data.items));
     dispatch(auctionSlice.actions.resetSlice());
   } catch (error) {
@@ -123,10 +118,7 @@ export const getMyAuctionItems = () => async (dispatch) => {
 export const getAuctionDetail = (id) => async (dispatch) => {
   dispatch(auctionSlice.actions.getAuctionDetailRequest());
   try {
-    const response = await axios.get(
-      `https://auction-website-lake.vercel.app/api/v1/auctionitem/auction/${id}`,
-      { withCredentials: true }
-    );
+    const response = await axios.get(api(`/api/v1/auctionitem/auction/${id}`), { withCredentials: true });
     dispatch(auctionSlice.actions.getAuctionDetailSuccess(response.data));
     dispatch(auctionSlice.actions.resetSlice());
   } catch (error) {
@@ -140,7 +132,7 @@ export const createAuction = (data) => async (dispatch) => {
   dispatch(auctionSlice.actions.createAuctionRequest());
   try {
     const response = await axios.post(
-      "https://auction-website-lake.vercel.app/api/v1/auctionitem/create",
+      api("/api/v1/auctionitem/create"),
       data,
       {
         withCredentials: true,
@@ -162,7 +154,7 @@ export const republishAuction = (id, data) => async (dispatch) => {
   dispatch(auctionSlice.actions.republishItemRequest());
   try {
     const response = await axios.put(
-      `https://auction-website-lake.vercel.app/api/v1/auctionitem/item/republish/${id}`,
+      api(`/api/v1/auctionitem/item/republish/${id}`),
       data,
       {
         withCredentials: true,
@@ -185,12 +177,9 @@ export const republishAuction = (id, data) => async (dispatch) => {
 export const deleteAuction = (id) => async (dispatch) => {
   dispatch(auctionSlice.actions.deleteAuctionItemRequest());
   try {
-    const response = await axios.delete(
-      `https://auction-website-lake.vercel.app/api/v1/auctionitem/delete/${id}`,
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await axios.delete(api(`/api/v1/auctionitem/delete/${id}`), {
+      withCredentials: true,
+    });
     dispatch(auctionSlice.actions.deleteAuctionItemSuccess());
     toast.success(response.data.message);
     dispatch(getMyAuctionItems());

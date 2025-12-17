@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { api } from "../../lib/api";
 import { toast } from "react-toastify";
 
 const userSlice = createSlice({
@@ -91,7 +92,7 @@ export const register = (data) => async (dispatch) => {
   dispatch(userSlice.actions.registerRequest());
   try {
     const response = await axios.post(
-      "https://auction-website-lake.vercel.app/api/v1/user/sign-up",
+      api("/api/v1/user/sign-up"),
       data,
       {
         withCredentials: true,
@@ -113,7 +114,7 @@ export const login = (data) => async (dispatch) => {
   dispatch(userSlice.actions.loginRequest());
   try {
     const response = await axios.post(
-      "https://auction-website-lake.vercel.app/api/v1/user/login",
+      api("/api/v1/user/login"),
       data,
       {
         withCredentials: true,
@@ -132,10 +133,7 @@ export const login = (data) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
-    const response = await axios.get(
-      "https://auction-website-lake.vercel.app/api/v1/user/logout",
-      { withCredentials: true }
-    );
+    const response = await axios.get(api("/api/v1/user/logout"), { withCredentials: true });
     dispatch(userSlice.actions.logoutSuccess());
     toast.success(response.data.message);
     dispatch(userSlice.actions.clearAllErrors());
@@ -149,7 +147,7 @@ export const logout = () => async (dispatch) => {
 export const fetchUser = () => async (dispatch) => {
   dispatch(userSlice.actions.fetchUserRequest());
   try {
-    const response = await axios.get("https://auction-website-lake.vercel.app/api/v1/user/me", {
+    const response = await axios.get(api("/api/v1/user/me"), {
       withCredentials: true,
     });
     dispatch(userSlice.actions.fetchUserSuccess(response.data.user));
@@ -164,12 +162,7 @@ export const fetchUser = () => async (dispatch) => {
 export const fetchLeaderboard = () => async (dispatch) => {
   dispatch(userSlice.actions.fetchLeaderboardRequest());
   try {
-    const response = await axios.get(
-      "https://auction-website-lake.vercel.app/api/v1/user/leaderboard",
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await axios.get(api("/api/v1/user/leaderboard"), { withCredentials: true });
     dispatch(
       userSlice.actions.fetchLeaderboardSuccess(response.data.leaderboard)
     );
