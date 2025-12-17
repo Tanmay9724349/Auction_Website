@@ -20,10 +20,19 @@ const app = express();
 connection();
 
 // CORS config
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", process.env.FRONTEND_URL || "https://auction-website-tf.vercel.app");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type,Authorization");
+  if (req.method === "OPTIONS") return res.sendStatus(200);
+  next();
+});
+
 const allowedOrigin = process.env.FRONTEND_URL || "*";
 app.use(
   cors({
-    origin: allowedOrigin,
+    origin: FRONTEND_URL,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
