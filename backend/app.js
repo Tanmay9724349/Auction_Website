@@ -18,9 +18,20 @@ config({
   path: "./config/config.env",
 });
 
+// Allow multiple frontend origins via FRONTEND_URL env (comma-separated)
+const rawFrontend = process.env.FRONTEND_URL || "http://localhost:5173";
+const allowedOrigins = rawFrontend.split(",").map((s) => s.trim()).filter(Boolean);
+
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL || "http://localhost:5173"],
+    origin: function (origin, callback) {
+      // allow requests with no origin (like curl, mobile apps, server-to-server)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        return callback(null, true);
+      }
+      return callback(new Error("CORS policy: origin not allowed"));
+    },
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
