@@ -19,7 +19,11 @@ config({
 });
 
 // Allow multiple frontend origins via FRONTEND_URL env (comma-separated)
-const rawFrontend = process.env.FRONTEND_URL || "http://localhost:5173";
+// If FRONTEND_URL is not set (e.g., on remote deploy), include the
+// known frontend Vercel URL so CORS still allows browser requests.
+const rawFrontend =
+  process.env.FRONTEND_URL ||
+  "http://localhost:5173,https://auction-website-qjc5cxxok-tanmay-patels-projects-03162225.vercel.app";
 const allowedOrigins = rawFrontend.split(",").map((s) => s.trim()).filter(Boolean);
 
 app.use(
