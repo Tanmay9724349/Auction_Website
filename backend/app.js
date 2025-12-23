@@ -30,7 +30,8 @@ app.use(
       if (allowedOrigins.indexOf(origin) !== -1) {
         return callback(null, true);
       }
-      return callback(new Error("CORS policy: origin not allowed"));
+      console.warn(`CORS blocked origin: ${origin}`);
+      return callback(null, false);
     },
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
