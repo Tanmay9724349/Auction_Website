@@ -27,20 +27,14 @@ const rawFrontend =
 const allowedOrigins = rawFrontend.split(",").map((s) => s.trim()).filter(Boolean);
 
 console.log("CORS allowed origins:", allowedOrigins);
+console.log("Current NODE_ENV:", process.env.NODE_ENV);
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // allow requests with no origin (like curl, mobile apps, server-to-server)
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) !== -1) {
-        return callback(null, true);
-      }
-      console.warn(`CORS blocked origin: ${origin}`);
-      return callback(null, false);
-    },
-    methods: ["POST", "GET", "PUT", "DELETE"],
+    origin: allowedOrigins,
+    methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
