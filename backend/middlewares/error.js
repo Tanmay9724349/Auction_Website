@@ -28,6 +28,9 @@ export const errorMiddleware = (err, req, res, next) => {
         .join(" ")
     : err.message;
 
+      // Log full error stack for debugging server-side 500s
+  if (err && err.stack) console.error(err.stack);
+
   return res.status(err.statusCode).json({
     success: false,
     message: errorMessage,

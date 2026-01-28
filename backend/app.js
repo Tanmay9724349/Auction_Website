@@ -23,8 +23,10 @@ config({
 // known frontend Vercel URL so CORS still allows browser requests.
 const rawFrontend =
   process.env.FRONTEND_URL ||
-  "http://localhost:5173,https://auction-website-qjc5cxxok-tanmay-patels-projects-03162225.vercel.app";
+  "https://auction-website-gules.vercel.app";
 const allowedOrigins = rawFrontend.split(",").map((s) => s.trim()).filter(Boolean);
+
+console.log("CORS allowed origins:", allowedOrigins);
 
 app.use(
   cors({
