@@ -18,25 +18,42 @@ config({
   path: "./config/config.env",
 });
 
-// Allow multiple frontend origins via FRONTEND_URL env (comma-separated)
-// If FRONTEND_URL is not set (e.g., on remote deploy), include the
-// known frontend Vercel URL so CORS still allows browser requests.
-const rawFrontend =
-  process.env.FRONTEND_URL ||
-  "https://auction-website-gules.vercel.app";
-const allowedOrigins = rawFrontend.split(",").map((s) => s.trim()).filter(Boolean);
+// CORS Configuration - Allow frontend origins
+const allowedOrigins = [
+  "https://auction-website-gules.vercel.app",
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "http://127.0.0.1:5173",
+  process.env.FRONTEND_URL,
+].filter(Boolean);
 
 console.log("CORS allowed origins:", allowedOrigins);
-console.log("Current NODE_ENV:", process.env.NODE_ENV);
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like curl, mobile apps, server-to-server)
+    if (!origin) {
+      return callback(null, true);
+    }
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.warn(`CORS blocked origin: ${origin}`);
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 200,
+};
+
+// Enable CORS
+app.use(cors(corsOptions));
+
+// Preflight requests
+app.options("*", cors(corsOptions));
 
 app.use(cookieParser());
 app.use(express.json());
