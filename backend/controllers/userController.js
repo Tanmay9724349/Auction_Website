@@ -67,32 +67,40 @@ export const register = catchAsyncErrors(async (req, res, next) => {
       new ErrorHandler("Failed to upload profile image to cloudinary.", 500)
     );
   }
-  const user = await User.create({
-    userName,
-    email,
-    password,
-    phone,
-    address,
-    role,
-    profileImage: {
-      public_id: cloudinaryResponse.public_id,
-      url: cloudinaryResponse.secure_url,
-    },
-    paymentMethods: {
-      bankTransfer: {
-        bankAccountNumber,
-        bankAccountName,
-        bankName,
+  
+  try {
+    const user = await User.create({
+      userName,
+      email,
+      password,
+      phone,
+      address,
+      role,
+      profileImage: {
+        public_id: cloudinaryResponse.public_id,
+        url: cloudinaryResponse.secure_url,
       },
-      easypaisa: {
-        easypaisaAccountNumber,
+      paymentMethods: {
+        bankTransfer: {
+          bankAccountNumber,
+          bankAccountName,
+          bankName,
+        },
+        easypaisa: {
+          easypaisaAccountNumber,
+        },
+        paypal: {
+          paypalEmail,
+        },
       },
-      paypal: {
-        paypalEmail,
-      },
-    },
-  });
-  generateToken(user, "User Registered.", 201, res);
+    });
+    generateToken(user, "User Registered.", 201, res);
+  } catch (error) {
+    console.error("User creation error:", error);
+    return next(
+      new ErrorHandler(error.message || "Failed to register user.", 500)
+    );
+  }
 });
 
 export const login = catchAsyncErrors(async (req, res, next) => {
