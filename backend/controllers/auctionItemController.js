@@ -104,11 +104,16 @@ export const addNewAuctionItem = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const getAllItems = catchAsyncErrors(async (req, res, next) => {
-  let items = await Auction.find();
-  res.status(200).json({
-    success: true,
-    items,
-  });
+  try {
+    let items = await Auction.find();
+    res.status(200).json({
+      success: true,
+      items,
+    });
+  } catch (error) {
+    console.error("Error fetching all items:", error);
+    return next(new ErrorHandler(error.message || "Failed to fetch items.", 500));
+  }
 });
 
 export const getAuctionDetails = catchAsyncErrors(async (req, res, next) => {
