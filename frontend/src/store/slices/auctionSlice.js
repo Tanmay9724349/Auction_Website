@@ -131,9 +131,15 @@ export const getAuctionDetail = (id) => async (dispatch) => {
 export const createAuction = (data) => async (dispatch) => {
   dispatch(auctionSlice.actions.createAuctionRequest());
   try {
+    const getCookie = (name) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    };
+    const token = getCookie('token');
     const response = await axios.post(`${API_URL}/api/v1/auctionitem/create`, data, {
       withCredentials: true,
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: { "Content-Type": "multipart/form-data", "Authorization": `Bearer ${token}` },
     });
     dispatch(auctionSlice.actions.createAuctionSuccess());
     toast.success(response.data.message);
