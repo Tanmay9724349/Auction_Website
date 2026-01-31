@@ -47,11 +47,11 @@ const About = () => {
         </div>
         <div>
           <h3
-            className={`text-[#ffffff] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl`}
+            className={`text-[#111] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl`}
           >
             Our Mission
           </h3>
-          <p className="text-xl text-stone-600">
+          <p className="text-xl text-stone-600 text-[#ffffff] ">
             At PrimeBid, our mission is to revolutionize the way people buy and
             sell items online. We strive to create an engaging and trustworthy
             marketplace that empowers individuals and businesses to discover
