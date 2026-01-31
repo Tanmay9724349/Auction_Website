@@ -14,9 +14,9 @@ const router = express.Router();
 
 router.post(
   "/create",
-  isAuthenticated,
-  isAuthorized("Auctioneer"),
-  trackCommissionStatus,
+  // isAuthenticated,
+  // isAuthorized("Auctioneer"),
+  // trackCommissionStatus,
   addNewAuctionItem
 );
 
