@@ -65,7 +65,7 @@ app.use(
   })
 );
 
-app.use("/api/v1/user/me", userRouter);
+app.use("/api/v1/user", userRouter);
 app.use("/api/v1/auctionitem", auctionItemRouter);
 app.use("/api/v1/bid", bidRouter);
 app.use("/api/v1/commission", commissionRouter);
