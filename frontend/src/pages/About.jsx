@@ -47,7 +47,7 @@ const About = () => {
         </div>
         <div>
           <h3
-            className={`text-[#111] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl`}
+            className={`text-[#ffffff] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl`}
           >
             Our Mission
           </h3>
